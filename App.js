@@ -1,6 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import Disclaimer from "./views/Disclaimer"
+import Statefarm from "./views/Statefarm"
+import Survey from "./views/Survey"
+import Therapist from "./views/Therapist"
 import { StyleSheet, Text, View, Button} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -31,18 +34,23 @@ function HomeScreen({ navigation }) {
         title="Disclaimer"
         onPress={() => navigation.navigate('Disclaimer')}
       />
+      
       <Button
         title="Survey"
         onPress={() => navigation.navigate('Survey')}
-      />
+      /> 
+
       <Button
         title="Therapist"
         onPress={() => navigation.navigate('Therapist')}
       />
+
       <Button
         title="Statefarm"
-        onPress={() => navigation.navigate('Survey')}
+        onPress={() => navigation.navigate('Statefarm')}
       />
+
+ 
     </View>
   );
 }
@@ -63,9 +71,20 @@ function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Disclaimer" component={Disclaimer} />
+        <Stack.Screen name="Survey" component={Survey} />
+        <Stack.Screen name="Therapist" component={Therapist} />
+        <Stack.Screen name="Statefarm" component={Statefarm} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 export default App;
+
+// 
+// 
+// 
+
+
+
+
