@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "comethealth",
+    "slug": "comethealth",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "comethealth"
+}
