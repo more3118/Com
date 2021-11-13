@@ -7,6 +7,7 @@ import Therapist from "./views/Therapist"
 import { StyleSheet, Text, View, Button} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ModalTester from './components/Popup';
 
 // export default function App() {
 //   return (
@@ -30,6 +31,7 @@ function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Home Screen</Text>
+      
       <Button
         title="Disclaimer"
         onPress={() => navigation.navigate('Disclaimer')}
