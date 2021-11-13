@@ -57,7 +57,7 @@ function HomeScreen({ navigation }) {
 
 const Stack = createNativeStackNavigator();
 
-function DetailsScreen() {
+function DetailsScreen({navigate}) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Details Screen</Text>
