@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
-function Statefarm({navigation}) {
+function StatefarmInfo({navigation}) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <View style={styles.img}>
@@ -21,23 +21,18 @@ function Statefarm({navigation}) {
         style={{ width: 150, height: 150 }}
         />
         </View>
-
-        <View style={{marginRight: 80, marginLeft: 80}}>
-        <Text style={{color: 'red', fontWeight: 'bold'}}>Please type your State Farm Policy Number to begin the referal process.</Text>
-        <View style={{marginTop: 30}}>
-        <Text style={{fontWeight: 'bold'}}>State Farm Policy Number</Text>
-        <Text style={{fontSize: 20}}>089 9897-879-898</Text>
+        <View>
+        <Text style={{color: 'red'}}>Last Visited</Text>
+        <Text>Dr. Leah M. Johnson
+        110 Cityline Dr, Richardson, TX 75082</Text>
         </View>
-        </View>
-
-        <View style={{marginTop: 50}}>
-        <TouchableOpacity 
-        style={[{backgroundColor: '#ff6347'}, styles.button]}
-        onPress={() => navigation.navigate('StatefarmInfo')}>
-            <Text style={{color: 'white'}}>See Who's Near Me</Text> 
-        </TouchableOpacity> 
-        
-        </View>
+        <Text>Doctors Near Me (within 5 miles)</Text>
+        <Text>Dr. Eddie Kim
+        452 Water Blvd #104, Richardson, TX 75080</Text>
+        <Text>Dr. Bill R. Villanueva
+        1009 Waterpark Dr, #45 Richardson, TX 75081</Text>
+        <Text>Dr. Leah M. Johnson
+        110 Cityline Dr, Richardson, TX 75082</Text>
 
         <View style={styles.back}>
         <TouchableOpacity 
@@ -53,13 +48,12 @@ function Statefarm({navigation}) {
         />
       </View>
 
-      </View>
-
+     </View>
       
     );
   }
 
-  export default Statefarm;
+  export default StatefarmInfo;
 
   const styles = StyleSheet.create({
     container: {
@@ -92,7 +86,7 @@ function Statefarm({navigation}) {
     },
 
     img: {
-      marginTop: 50,
+      marginTop: 30,
       flexDirection: "row",
       flex: 1,
       alignItems: 'center',
@@ -100,10 +94,9 @@ function Statefarm({navigation}) {
     },
   
     utd: {
-      flex: 0.3,
+      flex: 0.5,
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom:30
     },
   
     button: {
@@ -120,7 +113,7 @@ function Statefarm({navigation}) {
     },
 
     back: {
-        marginTop: 50,
+        marginTop: 100,
         marginLeft: 250,
     },
 
