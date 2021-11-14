@@ -253,33 +253,33 @@ function Cal({navigation}) {
           <Text style={tailwind("text-white")}>Avaliable Time</Text>
           <TouchableOpacity
             onPress={(doctor) => {
-              setDoc("Doctor1")
+              setDoc("Amy Han")
             }}
             style={styles.button}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}>Counselor 1 </Text>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Amy Han </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={(doctor) => {
-              setDoc("Doctor2")
+              setDoc("Amanda Smith")
             }}
             style={styles.button}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}>Counselor 2</Text>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Amanda Smith</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             onPress={(doctor) => {
-              setDoc("Doctor3")
+              setDoc("Fayad Tiah")
             }}
             style={styles.button}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}>Counselor 3</Text>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Fayad Tiah</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={(doctor) => {
-              setDoc("Doctor4")
+              setDoc("Jimmy Nguyen")
             }}
             style={styles.button}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}>Counselor 4</Text>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Jimmy Nguyen</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
