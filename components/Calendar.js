@@ -1,4 +1,4 @@
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import {Calendar, CalendarList, Agenda, Image} from 'react-native-calendars';
 import React, { useState } from "react";
 import { Alert, Button, Text, View } from "react-native";
 import Modal from "react-native-modal";
@@ -6,7 +6,7 @@ import tailwind from "tailwind-rn"
 import axios from 'axios';
 
 
-function Cal() {
+function Cal({navigation}) {
     const [count, setCount] = useState('No Date Selected!');
     const [isModalVisible, setModalVisible] = useState(false);
     const [isModalVisible2, setModalVisible2] = useState(false);
@@ -68,9 +68,9 @@ function Cal() {
         disabledArrowColor: '#d9e1e8',
         monthTextColor: 'blue',
         indicatorColor: 'blue',
-        textDayFontFamily: 'monospace',
-        textMonthFontFamily: 'monospace',
-        textDayHeaderFontFamily: 'monospace',
+        // textDayFontFamily: 'monospace',
+        // textMonthFontFamily: 'monospace',
+        // textDayHeaderFontFamily: 'monospace',
         textDayFontWeight: '300',
         textMonthFontWeight: 'bold',
         textDayHeaderFontWeight: '300',
@@ -130,6 +130,7 @@ function Cal() {
   <Button title="Doctor" onPress={toggleModal2}></Button>
   <Text></Text>
   <Button title="Submit" onPress={cal_submit}></Button>
+  <Button title="Confirm" onPress={() => navigation.navigate('Confirmation')}></Button>
   <Modal isVisible={isModalVisible}>
         <View style={tailwind("justify-center")}>
           <Button title="8:30AM" color="orange"  onPress={(time) => {setTime("8:30AM")}}></Button>

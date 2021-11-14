@@ -3,7 +3,9 @@ import Disclaimer from "./views/Disclaimer"
 import Statefarm from "./views/Statefarm"
 import Survey from "./views/Survey"
 import Therapist from "./views/Therapist"
+import Confirmation from "./views/Confirmation"
 import SurveyQues from "./views/SurveyQues"
+import Cal from "./components/Calendar"
 import StatefarmInfo from "./views/StatefarmInfo"
 import {StyleSheet, Text, View, Button, Image, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
@@ -97,7 +99,7 @@ function App() {
               name="Therapist"
               component={Therapist}
               options={{
-                headerShown: true
+                headerShown: false
               }}
             />
             <Stack.Screen
@@ -110,6 +112,20 @@ function App() {
             <Stack.Screen
               name="StatefarmInfo"
               component={StatefarmInfo}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="Cal"
+              component={Cal}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="Confirmation"
+              component={Confirmation}
               options={{
                 headerShown: false
               }}

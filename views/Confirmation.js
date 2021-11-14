@@ -1,13 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, TouchableOpacity, TextInput} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View, Button, Image, TouchableOpacity} from 'react-native';
+import tailwind from 'tailwind-rn';
 
-
-function Statefarm({navigation}) {
-    const [number, onChangeNumber] = React.useState(null);
+function Confirmation({navigation}) {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+
         <View style={styles.img}>
         <Image source={require('../img/mascot.png')} 
         style={{ width: 120, height: 120 }}
@@ -17,43 +15,23 @@ function Statefarm({navigation}) {
         </View>
         </View>
         <View style={styles.line}></View>
-        <View style={{marginTop: 60, marginBottom: 60}}>
-        <Image source={require('../img/statefarm.png')}
-        
-        />
+        <View style={styles.survey}>
+           <Text style={styles.green}>Mental Health Survey</Text>
         </View>
-
-        <View style={{marginRight: 80, marginLeft: 80}}>
-        <Text style={{color: 'red', fontWeight: 'bold'}}>Please type your State Farm Policy Number to begin the referal process.</Text>
-        <View style={{marginTop: 30}}>
-        <Text style={{fontWeight: 'bold'}}>State Farm Policy Number</Text>
-        <TextInput
-        style={styles.input}
-        onChangeText={onChangeNumber}
-        value={number}
-        placeholder="Type your policy number here"
-        keyboardType="numeric"
-      />
+        <View style={{marginRight: 50, marginLeft:50, marginTop: 100, marginBottom:50, flex: 0.7}}>
+            <Text style={{color:'orange', fontWeight:'bold', fontSize:20}}>Your appointment is booked. You will receive an email confirmation shortly.
+ </Text>
+            <View style={{marginTop:20}}>
+            <Text style={{color:'orange', fontWeight:'bold', fontSize:20}}>Comet Health is rooting for you!</Text>
+            </View>
         </View>
-        </View>
-
-        <View style={{marginTop: 50}}>
-        <TouchableOpacity 
-        style={[{backgroundColor: '#ff6347'}, styles.button]}
-        onPress={() => navigation.navigate('StatefarmInfo')}>
-            <Text style={{color: 'white'}}>See Who's Near Me</Text> 
-        </TouchableOpacity> 
-        
-        </View>
-
         <View style={styles.back}>
         <TouchableOpacity 
-            onPress={() => navigation.goBack()}>
-            <Text style={{color: 'darkgreen', fontWeight: 'bold'}}>Go back</Text> 
+        onPress={() => navigation.navigate('HomeScreen')}>
+            <Text style={{color: 'darkgreen', fontWeight: 'bold'}}>Go to home page</Text> 
         </TouchableOpacity> 
         
         </View>
-
         <View style={styles.utd}>
         <Image source={require('../img/utdallas.png')} 
         style={{ width: 50, height: 50 }}
@@ -61,14 +39,12 @@ function Statefarm({navigation}) {
       </View>
 
       </View>
-
-      
     );
   }
 
-  export default Statefarm;
+export default Confirmation;
 
-  const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         marginTop: 100,
         flex: 1,
@@ -101,16 +77,15 @@ function Statefarm({navigation}) {
     img: {
       marginTop: 50,
       flexDirection: "row",
-      flex: 1,
+      flex: 0.7,
       alignItems: 'center',
       justifyContent: 'center',
     },
   
     utd: {
-      flex: 0.3,
+      flex: 0.5,
       alignItems: 'center',
       justifyContent: 'center',
-      marginBottom:30
     },
   
     button: {
@@ -127,8 +102,9 @@ function Statefarm({navigation}) {
     },
 
     back: {
-        marginTop: 50,
-        marginLeft: 250,
+        marginTop: 100,
+        marginLeft: 50,
+        marginRight: 50,
     },
 
     textview: {
@@ -151,6 +127,9 @@ function Statefarm({navigation}) {
 
     list: {
         marginTop: 20,
+    },
+     survey: {
+        marginTop: 30,
     },
   
   });

@@ -154,6 +154,7 @@ function SurveyQues({navigation}) {
           <TouchableOpacity
             style={[{backgroundColor: 'darkgreen'}, styles.button]}
             onPress={() => handleSubmit()}
+            onPressIn={() => navigation.navigate('Cal')}
           >
             <Text style={{color: 'white'}}>Submit</Text>
           </TouchableOpacity>

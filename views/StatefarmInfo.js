@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 function StatefarmInfo({navigation}) {
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <View style={styles.img}>
@@ -16,23 +17,27 @@ function StatefarmInfo({navigation}) {
         </View>
         </View>
         <View style={styles.line}></View>
-        <View style={{marginTop: 60, marginBottom: 60}}>
+        <View style={{marginTop: 30, marginBottom: 30}}>
         <Image source={require('../img/statefarm.png')}
-        style={{ width: 150, height: 150 }}
         />
         </View>
-        <View>
+        <View style={{marginBottom: 30, marginRight: 60}}>
         <Text style={{color: 'red'}}>Last Visited</Text>
-        <Text>Dr. Leah M. Johnson
-        110 Cityline Dr, Richardson, TX 75082</Text>
+        <Text>Dr. Leah M. Johnson</Text>
+        <Text>110 Cityline Dr, Richardson, TX 75082</Text>
         </View>
-        <Text>Doctors Near Me (within 5 miles)</Text>
-        <Text>Dr. Eddie Kim
-        452 Water Blvd #104, Richardson, TX 75080</Text>
-        <Text>Dr. Bill R. Villanueva
-        1009 Waterpark Dr, #45 Richardson, TX 75081</Text>
-        <Text>Dr. Leah M. Johnson
-        110 Cityline Dr, Richardson, TX 75082</Text>
+        <View style={{marginBottom: 20}}><Text style={{color: 'red'}}>Doctors Near Me (within 5 miles)</Text></View>
+        <View style={{alignContent: 'flex-start'}}>
+            <View style={{marginBottom: 20}}>
+                <Text>Dr. Eddie Kim</Text>
+                <Text>452 Water Blvd #104, Richardson, TX 75080</Text></View>
+            <View style={{marginBottom: 20}}>
+                <Text>Dr. Bill R. Villanueva</Text>
+                <Text>1009 Waterpark Dr, #45 Richardson, TX 75081</Text></View>
+
+        <Text>Dr. Leah M. Johnson </Text>
+        <Text>110 Cityline Dr, Richardson, TX 75082</Text>
+        </View>
 
         <View style={styles.back}>
         <TouchableOpacity 
@@ -86,7 +91,7 @@ function StatefarmInfo({navigation}) {
     },
 
     img: {
-      marginTop: 30,
+      marginTop: 50,
       flexDirection: "row",
       flex: 1,
       alignItems: 'center',
