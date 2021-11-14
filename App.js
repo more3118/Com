@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import Disclaimer from "./views/Disclaimer"
 import Statefarm from "./views/Statefarm"
@@ -6,55 +5,56 @@ import Survey from "./views/Survey"
 import Therapist from "./views/Therapist"
 import SurveyQues from "./views/SurveyQues"
 import StatefarmInfo from "./views/StatefarmInfo"
-import { StyleSheet, Text, View, Button, Image} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import ModalTester from './components/Popup';
+import {StyleSheet, Text, View, Button, Image} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {AuthProvider} from "./providers/AuthProvider";
+import {SurveysProvider} from "./providers/SurveysProvider";
 
-function HomeScreen({ navigation }) {
+function HomeScreen({navigation}) {
   return (
-    <View style={{ backgroundColor: '#fff', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <View style={{backgroundColor: '#fff', flex: 1, alignItems: 'center', justifyContent: 'center'}}>
       <View style={styles.container}>
         <Text style={styles.green}>Comet Health</Text>
       </View>
       <View style={styles.img}>
-        <Image source={require('./img/mascot.png')} 
-        style={{ width: 300, height: 300 }}
+        <Image source={require('./img/mascot.png')}
+               style={{width: 300, height: 300}}
         />
       </View>
       <View style={styles.button}>
-      <Button 
-        color = "white"
-        title="Mental Health Survey"
-        onPress={() => navigation.navigate('Survey')}
-      /> 
+        <Button
+          color="white"
+          title="Mental Health Survey"
+          onPress={() => navigation.navigate('Survey')}
+        />
       </View>
       <View style={styles.button}>
-      <Button
-        color = "white"
-        title="List of Counselors"
-        onPress={() => navigation.navigate('Therapist')}
-      />
+        <Button
+          color="white"
+          title="List of Counselors"
+          onPress={() => navigation.navigate('Therapist')}
+        />
       </View>
       <View style={styles.button}>
-      <Button
-        color = "white"
-        title="State Farm Insurance"
-        onPress={() => navigation.navigate('Statefarm')}
-      />
+        <Button
+          color="white"
+          title="State Farm Insurance"
+          onPress={() => navigation.navigate('Statefarm')}
+        />
       </View>
       <View style={styles.button}>
-      <Button
-        color = "white"
-        title="Disclaimer"
-        onPress={() => navigation.navigate('Disclaimer')}
-      />
+        <Button
+          color="white"
+          title="Disclaimer"
+          onPress={() => navigation.navigate('Disclaimer')}
+        />
       </View>
-      
+
 
       <View style={styles.utd}>
-        <Image source={require('./img/utdallas.png')} 
-        style={{ width: 50, height: 50 }}
+        <Image source={require('./img/utdallas.png')}
+               style={{width: 50, height: 50}}
         />
       </View>
 
@@ -66,40 +66,63 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Disclaimer" component={Disclaimer} 
-        options={{
-          headerShown: false
-        }}/>
-        <Stack.Screen name="HomeScreen" component={HomeScreen}
-        options={{
-          headerShown: false
-        }} />
-        <Stack.Screen name="Survey" component={Survey} 
-        options={{
-          headerShown: false
-        }}
-        />
-        <Stack.Screen name="Therapist" component={Therapist} 
-        options={{
-          headerShown: false
-        }}/>
-        <Stack.Screen name="Statefarm" component={Statefarm} 
-        options={{
-          headerShown: false
-        }}/>
-        <Stack.Screen name="SurveyQues" component={SurveyQues} 
-        options={{
-          headerShown: false
-        }}/>
-        <Stack.Screen name="StatefarmInfo" component={StatefarmInfo} 
-        options={{
-          headerShown: false
-        }}/>
-
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AuthProvider>
+      <SurveysProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="Disclaimer"
+              component={Disclaimer}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="Survey"
+              component={Survey}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="SurveyQues"
+              component={SurveyQues}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="Therapist"
+              component={Therapist}
+              options={{
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
+              name="Statefarm"
+              component={Statefarm}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="StatefarmInfo"
+              component={StatefarmInfo}
+              options={{
+                headerShown: false
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SurveysProvider>
+    </AuthProvider>
   );
 }
 

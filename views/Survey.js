@@ -1,182 +1,241 @@
-import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput, Image, TouchableOpacity} from 'react-native';
-import Home from '../App';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import App from '../App';
+import React, {useEffect} from 'react';
+import {StyleSheet, Text, View, TextInput, Image, TouchableOpacity, Alert} from 'react-native';
+import {useAuth} from "../providers/AuthProvider";
+import {useSurveys} from "../providers/SurveysProvider";
 
-function Survey({ navigation}) {
-    const [text, onChangeText] = React.useState("Useless Text");
+function Survey({navigation}) {
+  const {user, signIn} = useAuth();
+  const {surveys, getSurveys} = useSurveys();
+  const [netId, setNetId] = React.useState('');
 
-    return (
+  const STATUS_INITIAL = 'init'
+  const STATUS_NEW_USER = 'new'
+  const STATUS_OLD_USER = 'old'
+  const [status, setStatus] = React.useState(STATUS_INITIAL);
 
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <View style={styles.img}>
-        <Image source={require('../img/mascot.png')} 
-        style={{ width: 120, height: 120 }}
+  useEffect(() => {
+    // if (!!user && Object.keys(user).length !== 0) {
+    //   if (surveys.length === 0) {
+    //     navigation.navigate("SurveyQues");
+    //   } else {
+    //     setStatus(STATUS_OLD_USER);
+    //   }
+    // }
+  }, [user, surveys, status]);
+
+  const handleSubmit = async () => {
+    console.log("Press sign in");
+    try {
+      await signIn(netId);
+      const surveys = await getSurveys();
+      if (surveys.length === 0) {
+        navigation.navigate("SurveyQues");
+        setStatus(STATUS_NEW_USER);
+      } else {
+        setStatus(STATUS_OLD_USER);
+      }
+    } catch (error) {
+      Alert.alert(`Failed to sign in: ${error.message}`);
+    }
+  };
+
+  return (
+
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 24, paddingHorizontal: 36}}>
+      <View style={{display: 'flex', flexDirection: 'row', alignItems: 'flex-end'}}>
+        <Image
+          source={require('../img/mascot.png')}
+          style={{width: 80, height: 80}}
         />
-        <View style={styles.comet}>
-        <Text style={styles.boldgreen}>Comet Health</Text>
-        </View>
-        </View>
-        <View style={styles.line}></View>
+        <Text
+          style={{color: 'darkgreen', fontWeight: 'bold', fontSize: 32,}}
+        >
+          Comet Health
+        </Text>
+      </View>
 
-        <View style={styles.survey}>
-           <Text style={styles.green}>Mental Health Survey</Text>
-        </View>
-       
-        <View style={{marginRight: 210, marginTop: 50}}>
-        <Text>NetID</Text>
-        </View>
-        <View style={styles.inputview}>
+      <View style={{height: 2, width: '100%', backgroundColor: 'darkgreen', marginVertical: 16}}/>
 
-        <TextInput 
-        style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
+      <Text
+        style={{color: 'darkgreen', fontSize: 32}}
+      >
+        Mental Health Survey
+      </Text>
+
+      <View style={{width: '100%', paddingHorizontal: 20}}>
+        <Text style={{marginTop: 64, fontSize: 16, fontWeight: 'bold'}}>NetID</Text>
+        <TextInput
+          style={{height: 42, width: '100%', borderWidth: 1, paddingHorizontal: 12, borderRadius: 3}}
+          onChangeText={setNetId}
+          value={netId}
+          placeholder='XXX190001'
         />
-        <View style={styles.textview}>
-        <Text style={styles.text}>You are a new user. Click below to start.</Text>
-        <Text style={styles.text}>You are a returning user. We highly recommend that you submit a new survey on every visiy.</Text>
-        </View>
-        </View>
 
-        <View style={styles.surveybutton}>
-        <TouchableOpacity 
-        style={[{backgroundColor: '#ff6347'}, styles.button]}
-        onPress={() => navigation.navigate('SurveyQues')}>
-            <Text style={{color: 'white'}}>Start Survey</Text> 
-        </TouchableOpacity> 
+        {
+          status === STATUS_OLD_USER ? (
+            <Text style={styles.infoText}>You are a returning user. We highly recommend that you submit a new survey on
+              every visit.</Text>
+          ) : (
+            <Text style={styles.infoText}>You are a new user. Click below to start.</Text>
+          )
+        }
 
-        </View>
-        <View>
-        <TouchableOpacity 
-        style={[{backgroundColor: '#4c5c6a'}, styles.button]}>
-            <Text style={{color: 'white'}}>Continue with Previous Result</Text> 
-        </TouchableOpacity> 
-        
-        </View>
+        <View style={{marginTop: 64}}>
+          {
+            status === STATUS_INITIAL ?
+              (
+                <TouchableOpacity
+                  style={[{backgroundColor: '#e58143'}, styles.button]}
+                  onPress={() => handleSubmit()}
+                >
+                  <Text style={{color: 'white'}}>Submit</Text>
+                </TouchableOpacity>
+              ) : status === STATUS_OLD_USER ?
+              (
+                <>
+                  <TouchableOpacity
+                    style={[{backgroundColor: '#e58143'}, styles.button]}
+                    onPress={() => navigation.navigate('SurveyQues')}
+                  >
+                    <Text style={{color: 'white'}}>Start Survey</Text>
+                  </TouchableOpacity>
 
-        <View style={styles.back}>
-        <TouchableOpacity 
-        onPress={() => navigation.goBack()}>
-            <Text style={{color: 'darkgreen', fontWeight: 'bold'}}>Go back</Text> 
-        </TouchableOpacity> 
-        
+                  <TouchableOpacity
+                    style={[{backgroundColor: '#4c5c6a'}, styles.button]}
+                  >
+                    <Text style={{color: 'white'}}>Continue with Previous Result</Text>
+                  </TouchableOpacity>
+                </>
+              ) :
+              (
+                <></>
+              )
+          }
         </View>
-        <View style={styles.utd}>
-        <Image source={require('../img/utdallas.png')} 
-        style={{ width: 50, height: 50 }}
+      </View>
+
+      <View style={styles.back}>
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}>
+          <Text style={{color: 'darkgreen', fontWeight: 'bold'}}>Go back</Text>
+        </TouchableOpacity>
+
+      </View>
+      <View style={styles.utd}>
+        <Image source={require('../img/utdallas.png')}
+               style={{width: 50, height: 50}}
         />
       </View>
 
-      </View>
-    );
-  }
+    </View>
+  );
+}
 
 
-  export default Survey;
+export default Survey;
 
 
 const styles = StyleSheet.create({
-    container: {
-        marginTop: 100,
-        flex: 1,
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-  
-    boldgreen: {
-        color: 'darkgreen',
-        fontWeight: 'bold',
-        fontSize: 25,
-      },
+  container: {
+    marginTop: 100,
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
-    green: {
-      color: 'darkgreen',
-      fontSize: 25,
-    },
-    
-    comet: {
-      marginTop: 80,
-    },
+  boldgreen: {
+    color: 'darkgreen',
+    fontWeight: 'bold',
+    fontSize: 25,
+  },
 
-    line: {
-        backgroundColor: 'darkgreen',
-        height: 1,
-        width: 300,
-    },
+  green: {
+    color: 'darkgreen',
+    fontSize: 25,
+  },
 
-    img: {
-      marginTop: 30,
-      flexDirection: "row",
-      flex: 0.5,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  
-    utd: {
-      flex: 0.15,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  
-    button: {
-      marginTop: 20,
-      height: 40,
-      width: 250,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
+  comet: {
+    marginTop: 80,
+  },
 
-    input: {
-        height: 40,
-        width: 250,
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-    },
+  line: {
+    backgroundColor: 'darkgreen',
+    height: 1,
+    width: 300,
+  },
 
-    inputview: {
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+  img: {
+    marginTop: 30,
+    flexDirection: "row",
+    flex: 0.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
-    text: {
-        color: 'red',
-        fontWeight: 'bold',
-    },
+  utd: {
+    flex: 0.15,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
-    survey: {
-        marginTop: 20,
-    },
+  button: {
+    marginTop: 20,
+    height: 42,
+    width: '100%',
+    borderRadius: 3,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 
-    surveybutton: {
-        marginTop: 100,
-    },
+  input: {
+    height: 40,
+    width: '100%',
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+  },
 
-    back: {
-        marginTop: 100,
-        marginLeft: 250,
-    },
+  inputview: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
-    textview: {
-        marginLeft: 85,
-        marginRight: 85,
-    }
-  
-  });
+  infoText: {
+    color: 'darkred',
+    fontWeight: 'bold',
+    paddingVertical: 8,
+  },
 
-        //   {/* <Button
-        //     color= "orange"
-        //     onPress={() => navigation.navigate('SurveyQues')}
-        //     title="Start Survey"/> */}
+  survey: {
+    marginTop: 20,
+  },
 
-        // <Button
-        //     color= "grey"
-        //     title="Continue with Previous Result"/>
+  surveybutton: {
+    marginTop: 100,
+  },
 
-        // <Button onPress={() => navigation.goBack()} title="Go back" />
+  back: {
+    marginTop: 100,
+    marginLeft: 250,
+  },
 
-  
+  textview: {
+    marginLeft: 85,
+    marginRight: 85,
+  }
+
+});
+
+//   {/* <Button
+//     color= "orange"
+//     onPress={() => navigation.navigate('SurveyQues')}
+//     title="Start Survey"/> */}
+
+// <Button
+//     color= "grey"
+//     title="Continue with Previous Result"/>
+
+// <Button onPress={() => navigation.goBack()} title="Go back" />
+
