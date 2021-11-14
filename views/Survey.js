@@ -5,7 +5,7 @@ import {useSurveys} from "../providers/SurveysProvider";
 
 function Survey({navigation}) {
   const {user, signIn} = useAuth();
-  const {surveys, createSurvey} = useSurveys();
+  const {surveys, getSurveys} = useSurveys();
   const [netId, setNetId] = React.useState('');
 
   const STATUS_INITIAL = 'init'
@@ -14,21 +14,26 @@ function Survey({navigation}) {
   const [status, setStatus] = React.useState(STATUS_INITIAL);
 
   useEffect(() => {
-    if (user != null) {
-      if (surveys.length === 0) {
-        navigation.navigate("SurveyQues");
-        setStatus(STATUS_INITIAL);
-        return;
-      } else {
-        setStatus(STATUS_OLD_USER);
-      }
-    }
-  }, [user, status]);
+    // if (!!user && Object.keys(user).length !== 0) {
+    //   if (surveys.length === 0) {
+    //     navigation.navigate("SurveyQues");
+    //   } else {
+    //     setStatus(STATUS_OLD_USER);
+    //   }
+    // }
+  }, [user, surveys, status]);
 
   const handleSubmit = async () => {
     console.log("Press sign in");
     try {
       await signIn(netId);
+      const surveys = await getSurveys();
+      if (surveys.length === 0) {
+        navigation.navigate("SurveyQues");
+        setStatus(STATUS_NEW_USER);
+      } else {
+        setStatus(STATUS_OLD_USER);
+      }
     } catch (error) {
       Alert.alert(`Failed to sign in: ${error.message}`);
     }
@@ -67,51 +72,45 @@ function Survey({navigation}) {
         />
 
         {
-          'My' === "My" ? (
-            <Text style={styles.infoText}>You are a new user. Click below to start.</Text>
-          ) : (
+          status === STATUS_OLD_USER ? (
             <Text style={styles.infoText}>You are a returning user. We highly recommend that you submit a new survey on
               every visit.</Text>
+          ) : (
+            <Text style={styles.infoText}>You are a new user. Click below to start.</Text>
           )
         }
 
         <View style={{marginTop: 64}}>
-          <TouchableOpacity
-            style={[{backgroundColor: '#e58143'}, styles.button]}
-            onPress={() => handleSubmit()}
-          >
-            <Text style={{color: 'white'}}>Submit</Text>
-          </TouchableOpacity>
-          {/*{*/}
-          {/*  status === STATUS_INITIAL ?*/}
-          {/*    (*/}
-          {/*      <TouchableOpacity*/}
-          {/*        style={[{backgroundColor: '#e58143'}, styles.button]}*/}
-          {/*        onPress={() => handleSubmit}*/}
-          {/*      >*/}
-          {/*        <Text style={{color: 'white'}}>Submit</Text>*/}
-          {/*      </TouchableOpacity>*/}
-          {/*    ) : status === STATUS_OLD_USER ?*/}
-          {/*    (*/}
-          {/*      <>*/}
-          {/*        <TouchableOpacity*/}
-          {/*          style={[{backgroundColor: '#e58143'}, styles.button]}*/}
-          {/*          onPress={() => navigation.navigate('SurveyQues')}*/}
-          {/*        >*/}
-          {/*          <Text style={{color: 'white'}}>Start Survey</Text>*/}
-          {/*        </TouchableOpacity>*/}
+          {
+            status === STATUS_INITIAL ?
+              (
+                <TouchableOpacity
+                  style={[{backgroundColor: '#e58143'}, styles.button]}
+                  onPress={() => handleSubmit()}
+                >
+                  <Text style={{color: 'white'}}>Submit</Text>
+                </TouchableOpacity>
+              ) : status === STATUS_OLD_USER ?
+              (
+                <>
+                  <TouchableOpacity
+                    style={[{backgroundColor: '#e58143'}, styles.button]}
+                    onPress={() => navigation.navigate('SurveyQues')}
+                  >
+                    <Text style={{color: 'white'}}>Start Survey</Text>
+                  </TouchableOpacity>
 
-          {/*        <TouchableOpacity*/}
-          {/*          style={[{backgroundColor: '#4c5c6a'}, styles.button]}*/}
-          {/*        >*/}
-          {/*          <Text style={{color: 'white'}}>Continue with Previous Result</Text>*/}
-          {/*        </TouchableOpacity>*/}
-          {/*      </>*/}
-          {/*    ) :*/}
-          {/*    (*/}
-          {/*      <></>*/}
-          {/*    )*/}
-          {/*}*/}
+                  <TouchableOpacity
+                    style={[{backgroundColor: '#4c5c6a'}, styles.button]}
+                  >
+                    <Text style={{color: 'white'}}>Continue with Previous Result</Text>
+                  </TouchableOpacity>
+                </>
+              ) :
+              (
+                <></>
+              )
+          }
         </View>
       </View>
 

@@ -1,15 +1,22 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button, ScrollView, Image, TextInput, TouchableOpacity} from 'react-native';
+import {useSurveys} from "../providers/SurveysProvider";
 
-function SurveyQues() {
-  const [a1, setA1] = React.useState("");
-  const [a2, setA2] = React.useState("");
-  const [a3, setA3] = React.useState("");
-  const [a4, setA4] = React.useState("");
-  const [a5, setA5] = React.useState("");
-  const [a6, setA6] = React.useState("");
-  const [a7, setA7] = React.useState("");
-  const [a8, setA8] = React.useState("");
+function SurveyQues({navigation}) {
+  const {createSurvey} = useSurveys();
+
+  const [a1, setA1] = React.useState("A");
+  const [a2, setA2] = React.useState("B");
+  const [a3, setA3] = React.useState("C");
+  const [a4, setA4] = React.useState("D");
+  const [a5, setA5] = React.useState("E");
+  const [a6, setA6] = React.useState("F");
+  const [a7, setA7] = React.useState("G");
+  const [a8, setA8] = React.useState("H");
+
+  const handleSubmit = () => {
+    createSurvey([a1, a2, a3, a4, a5, a6, a7, a8]);
+  }
 
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 24, paddingHorizontal: 36}}>
@@ -137,11 +144,17 @@ function SurveyQues() {
       </ScrollView>
       <View style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <View style={{display: 'flex', flexDirection: 'row', paddingHorizontal: 8, paddingVertical: 12}}>
-          <TouchableOpacity style={[{backgroundColor: '#4c5c6a'}, styles.button]}>
+          <TouchableOpacity
+            style={[{backgroundColor: '#4c5c6a'}, styles.button]}
+            onPress={() => navigation.goBack()}
+          >
             <Text style={{color: 'white'}}>Cancel</Text>
           </TouchableOpacity>
           <View style={{flexGrow: 1}}/>
-          <TouchableOpacity style={[{backgroundColor: 'darkgreen'}, styles.button]}>
+          <TouchableOpacity
+            style={[{backgroundColor: 'darkgreen'}, styles.button]}
+            onPress={() => handleSubmit()}
+          >
             <Text style={{color: 'white'}}>Submit</Text>
           </TouchableOpacity>
         </View>

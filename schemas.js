@@ -42,6 +42,9 @@ class Survey {
                 a3,
                 a4,
                 a5,
+                a6,
+                a7,
+                a8,
                 createdAt,
               }) {
     this._partition = partition;
@@ -51,6 +54,9 @@ class Survey {
     this.a3 = a3;
     this.a4 = a4;
     this.a5 = a5;
+    this.a6 = a6;
+    this.a7 = a7;
+    this.a8 = a8;
     this.created_at = createdAt;
   }
 
@@ -63,6 +69,9 @@ class Survey {
       a3: "string",
       a4: "string",
       a5: "string",
+      a6: "string",
+      a7: "string",
+      a8: "string",
       created_at: "date",
     },
     primaryKey: "_id",

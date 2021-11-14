@@ -25,10 +25,7 @@ function HomeScreen({navigation}) {
         <Button
           color="white"
           title="Mental Health Survey"
-          onPress={() => {
-            console.log(123)
-            navigation.navigate('Survey')
-          }}
+          onPress={() => navigation.navigate('Survey')}
         />
       </View>
       <View style={styles.button}>
@@ -69,60 +66,54 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <AuthProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              headerShown: false
-            }}
-          />
-          <Stack.Screen
-            name="Disclaimer"
-            component={Disclaimer}
-            options={{
-              headerShown: false
-            }}
-          />
-          <Stack.Screen
-            name="Survey"
-            options={{
-              headerShown: false
-            }}
-          >
-            {(props) => {
-              const {navigation, route} = props;
-              return (
-                <SurveysProvider>
-                  <Survey navigation={navigation} route={route}/>
-                </SurveysProvider>
-              );
-            }}
-          </Stack.Screen>
-          <Stack.Screen
-            name="Therapist"
-            component={Therapist}
-            options={{
-              headerShown: true
-            }}
-          />
-          <Stack.Screen
-            name="Statefarm"
-            component={Statefarm}
-            options={{
-              headerShown: false
-            }}
-          />
-          <Stack.Screen
-            name="SurveyQues"
-            component={SurveyQues}
-            options={{
-              headerShown: false
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <SurveysProvider>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen
+              name="Home"
+              component={HomeScreen}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="Disclaimer"
+              component={Disclaimer}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="Survey"
+              component={Survey}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="SurveyQues"
+              component={SurveyQues}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="Therapist"
+              component={Therapist}
+              options={{
+                headerShown: true
+              }}
+            />
+            <Stack.Screen
+              name="Statefarm"
+              component={Statefarm}
+              options={{
+                headerShown: false
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SurveysProvider>
     </AuthProvider>
   );
 }

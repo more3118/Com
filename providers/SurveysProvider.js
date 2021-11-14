@@ -1,74 +1,44 @@
-import React, {useContext, useState, useEffect, useRef} from "react";
-import Realm from "realm";
-import {Survey} from "../schemas";
+import React, {useContext, useState} from "react";
 import {useAuth} from "./AuthProvider";
+import axios from 'axios';
 
 const SurveysContext = React.createContext(null);
 
-const SurveysProvider = ({children, surveyPartition}) => {
+const SurveysProvider = ({children}) => {
   const [surveys, setSurveys] = useState([]);
   const {user} = useAuth();
 
   // Use a Ref to store the realm rather than the state because it is not
   // directly rendered, so updating it should not trigger a re-render as using
   // state would.
-  const realmRef = useRef(null);
 
-  useEffect(() => {
+  const createSurvey = async ([a1, a2, a3, a4, a5, a6, a7, a8]) => {
+    const data = {
+      userId: user.id, a1, a2, a3, a4, a5, a6, a7, a8,
+    }
+    axios
+      .post('https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/hackutd-sgusk/service/survey/incoming_webhook/webhook0', data)
+      .then((res) => {
+        console.log('Successfully created survey');
+      })
+  };
+
+  const getSurveys = async () => {
     if (!user) {
       return;
     }
 
-    // Enables offline-first: opens a local realm immediately without waiting
-    // for the download of a synchronized realm to be completed.
-    const OpenRealmBehaviorConfiguration = {
-      type: 'openImmediately',
-    };
-    const config = {
-      schema: [Survey.schema],
-      sync: {
-        user: user,
-        partitionValue: `user=${user.id}`,
-        newRealmFileBehavior: OpenRealmBehaviorConfiguration,
-        existingRealmFileBehavior: OpenRealmBehaviorConfiguration,
-      },
-    };
-    // open a realm for this particular project
-    Realm.open(config).then(async (userRealm) => {
-      realmRef.current = userRealm;
-      let surveys = await userRealm.objects("Survey");
-      surveys = Array.from(surveys).sort((a, b) => b.created_at - a.created_at);
-      setSurveys(surveys);
-    });
-
-    return () => {
-      // cleanup function
-      const projectRealm = realmRef.current;
-      if (projectRealm) {
-        projectRealm.close();
-        realmRef.current = null;
-        setSurveys([]);
+    const response = await axios.get('https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/hackutd-sgusk/service/survey/incoming_webhook/webhook0', {
+      params: {
+        userId: user.id
       }
-    };
-  }, [user, surveyPartition]);
-
-  const createSurvey = ([a1, a2, a3, a4, a5]) => {
-    const userRealm = realmRef.current;
-    userRealm.write(async () => {
-      // Create a new task in the same partition -- that is, in the same project.
-      await userRealm.create(
-        "Survey",
-        new Survey({
-          partition: surveyPartition,
-          a1: a1,
-          a2: a2,
-          a3: a3,
-          a4: a4,
-          a5: a5,
-          createdAt: new Date(),
-        }),
-      );
+    }).catch((err) => {
+      console.log(err)
     });
+
+    const surveys = response.data.sort((a, b) => b.created_at.$date.$numberLong - a.created_at.$date.$numberLong)
+    setSurveys(surveys)
+    return surveys;
   };
 
   // Render the children within the TaskContext's provider. The value contains
@@ -78,6 +48,7 @@ const SurveysProvider = ({children, surveyPartition}) => {
     <SurveysContext.Provider
       value={{
         createSurvey,
+        getSurveys,
         surveys
       }}
     >
