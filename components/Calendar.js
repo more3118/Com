@@ -3,10 +3,14 @@ import React, { useState } from "react";
 import { Button, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import tailwind from "tailwind-rn"
-import {LocaleConfig} from 'react-native-calendars';
 
 function Cal() {
     const [count, setCount] = useState('');
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+    };
   return (
 
     <View>
@@ -87,7 +91,15 @@ function Cal() {
     // Enable the option to swipe between months. Default = false
     enableSwipeMonths={true}
   />
-  <Text>{count}</Text>
+  <Text style={tailwind("text-center text-2xl my-4")}>Your Date: {count}</Text>
+  <Button title="Choose Times" onPress={toggleModal}></Button>
+  <Modal isVisible={isModalVisible}>
+        <View style={tailwind("justify-center")}>
+          <Text style={tailwind("text-3xl text-white bg-red-500 text-center mx-2 my-4 rounded-full")} > In a Real Emergency Call 911 </Text>
+          <Button title="Accept Terms" color="orange"  onPress={toggleModal}></Button>
+          
+        </View>
+      </Modal>
 </View>
 
   );
