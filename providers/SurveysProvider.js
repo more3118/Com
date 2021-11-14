@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useAuth} from "./AuthProvider";
 import axios from 'axios';
 
@@ -23,21 +23,17 @@ const SurveysProvider = ({children}) => {
       })
   };
 
-  const getSurveys = async () => {
-    if (!user) {
-      return;
-    }
-
+  const getSurveys = async (userId) => {
     const response = await axios.get('https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/hackutd-sgusk/service/survey/incoming_webhook/webhook0', {
       params: {
-        userId: user.id
+        userId: userId
       }
     }).catch((err) => {
       console.log(err)
     });
 
-    const surveys = response.data.sort((a, b) => b.created_at.$date.$numberLong - a.created_at.$date.$numberLong)
-    setSurveys(surveys)
+    const surveys = await response.data.sort((a, b) => b.created_at.$date.$numberLong - a.created_at.$date.$numberLong)
+    setSurveys(surveys);
     return surveys;
   };
 

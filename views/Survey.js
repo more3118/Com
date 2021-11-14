@@ -4,33 +4,26 @@ import {useAuth} from "../providers/AuthProvider";
 import {useSurveys} from "../providers/SurveysProvider";
 
 function Survey({navigation}) {
-  const {user, signIn} = useAuth();
+  const {user, signIn, signOut} = useAuth();
   const {surveys, getSurveys} = useSurveys();
   const [netId, setNetId] = React.useState('');
 
   const STATUS_INITIAL = 'init'
-  const STATUS_NEW_USER = 'new'
   const STATUS_OLD_USER = 'old'
   const [status, setStatus] = React.useState(STATUS_INITIAL);
 
   useEffect(() => {
-    // if (!!user && Object.keys(user).length !== 0) {
-    //   if (surveys.length === 0) {
-    //     navigation.navigate("SurveyQues");
-    //   } else {
-    //     setStatus(STATUS_OLD_USER);
-    //   }
-    // }
-  }, [user, surveys, status]);
+
+  }, [user]);
 
   const handleSubmit = async () => {
     console.log("Press sign in");
     try {
-      await signIn(netId);
-      const surveys = await getSurveys();
+      const user = await signIn(netId);
+      const surveys = await getSurveys(user.id);
       if (surveys.length === 0) {
+        setStatus(STATUS_INITIAL);
         navigation.navigate("SurveyQues");
-        setStatus(STATUS_NEW_USER);
       } else {
         setStatus(STATUS_OLD_USER);
       }
@@ -69,6 +62,7 @@ function Survey({navigation}) {
           onChangeText={setNetId}
           value={netId}
           placeholder='XXX190001'
+          editable={status !== STATUS_OLD_USER}
         />
 
         {
@@ -90,7 +84,7 @@ function Survey({navigation}) {
                 >
                   <Text style={{color: 'white'}}>Submit</Text>
                 </TouchableOpacity>
-              ) : status === STATUS_OLD_USER ?
+              ) :
               (
                 <>
                   <TouchableOpacity
@@ -106,9 +100,6 @@ function Survey({navigation}) {
                     <Text style={{color: 'white'}}>Continue with Previous Result</Text>
                   </TouchableOpacity>
                 </>
-              ) :
-              (
-                <></>
               )
           }
         </View>
