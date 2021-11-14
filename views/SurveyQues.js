@@ -5,14 +5,14 @@ import {useSurveys} from "../providers/SurveysProvider";
 function SurveyQues({navigation}) {
   const {createSurvey} = useSurveys();
 
-  const [a1, setA1] = React.useState("A");
-  const [a2, setA2] = React.useState("B");
-  const [a3, setA3] = React.useState("C");
-  const [a4, setA4] = React.useState("D");
-  const [a5, setA5] = React.useState("E");
-  const [a6, setA6] = React.useState("F");
-  const [a7, setA7] = React.useState("G");
-  const [a8, setA8] = React.useState("H");
+  const [a1, setA1] = React.useState("Y / N");
+  const [a2, setA2] = React.useState("Y / N");
+  const [a3, setA3] = React.useState("Y / N");
+  const [a4, setA4] = React.useState("Y / N");
+  const [a5, setA5] = React.useState("Y / N");
+  const [a6, setA6] = React.useState("Y / N");
+  const [a7, setA7] = React.useState("Y / N");
+  const [a8, setA8] = React.useState("Y / N");
 
   const handleSubmit = () => {
     createSurvey([a1, a2, a3, a4, a5, a6, a7, a8]);
@@ -148,7 +148,7 @@ function SurveyQues({navigation}) {
             style={[{backgroundColor: '#4c5c6a'}, styles.button]}
             onPress={() => navigation.goBack()}
           >
-            <Text style={{color: 'white'}}>Cancel</Text>
+            <Text style={{color: 'white', fontSize: 17}}>Cancel</Text>
           </TouchableOpacity>
           <View style={{flexGrow: 1}}/>
           <TouchableOpacity
@@ -156,7 +156,7 @@ function SurveyQues({navigation}) {
             onPress={() => handleSubmit()}
             onPressIn={() => navigation.navigate('Cal')}
           >
-            <Text style={{color: 'white'}}>Submit</Text>
+            <Text style={{color: 'white', fontSize: 17}}>Submit</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.utd}>

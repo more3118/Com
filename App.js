@@ -28,25 +28,25 @@ function HomeScreen({navigation}) {
       <TouchableOpacity
       onPress={() => navigation.navigate('Survey')}
       style={styles.button}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}>Mental Health Survey</Text> 
+            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 17}}>Mental Health Survey</Text> 
         </TouchableOpacity> 
 
       <TouchableOpacity
       onPress={() => navigation.navigate('Therapist')}
       style={styles.button}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}>List of Counselors</Text> 
+            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 17}}>List of Counselors</Text> 
       </TouchableOpacity>
 
       <TouchableOpacity
       onPress={() => navigation.navigate('Statefarm')}
       style={styles.button}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}>State Farm Insurance</Text> 
+            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 17}}>Doctor Referral</Text> 
       </TouchableOpacity>  
 
       <TouchableOpacity
       onPress={() => navigation.navigate('Disclaimer')}
       style={styles.button}>
-            <Text style={{color: 'white', fontWeight: 'bold'}}>Disclaimer</Text> 
+            <Text style={{color: 'white', fontWeight: 'bold', fontSize: 17}}>Disclaimer</Text> 
       </TouchableOpacity> 
       
       <View style={styles.utd}>

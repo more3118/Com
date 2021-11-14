@@ -49,7 +49,7 @@ function Statefarm({navigation}) {
         <View style={styles.back}>
         <TouchableOpacity 
             onPress={() => navigation.goBack()}>
-            <Text style={{color: 'darkgreen', fontWeight: 'bold'}}>Go back</Text> 
+            <Text style={{color: 'darkgreen', fontWeight: 'bold', fontSize:18}}>Go back</Text> 
         </TouchableOpacity> 
         
         </View>
