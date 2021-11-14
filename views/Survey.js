@@ -96,6 +96,7 @@ function Survey({navigation}) {
 
                   <TouchableOpacity
                     style={[{backgroundColor: '#4c5c6a'}, styles.button]}
+                    onPress={() => navigation.navigate('Cal')}
                   >
                     <Text style={{color: 'white'}}>Continue with Previous Result</Text>
                   </TouchableOpacity>
