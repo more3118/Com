@@ -7,6 +7,7 @@ import Therapist from "./views/Therapist"
 import { StyleSheet, Text, View, Button, Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ModalTester from './components/Popup';
 
 
 
@@ -25,6 +26,7 @@ function HomeScreen({ navigation }) {
       <Button 
         color = "white"
         title="Mental Health Survey"
+   
         onPress={() => navigation.navigate('Survey')}
       /> 
       </View>
@@ -62,6 +64,14 @@ function HomeScreen({ navigation }) {
 }
 
 const Stack = createNativeStackNavigator();
+
+function DetailsScreen({navigate}) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+    </View>
+  );
+}
 
 function App() {
   return (
