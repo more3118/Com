@@ -22,6 +22,20 @@ function Cal({navigation}) {
   }
 });
     }
+    function cal_submit2(){ axios.post('http://35.201.168.223:3016/api/mails', {
+      "to": "m020203@gmail.com",
+      "subject": "Email Confirmation",
+      "content": `count: ${count}\ntime: ${time}\ndoctor: ${doctor}`,
+      "templateId": "a008429a-d9af-485c-b5c9-6a85347d79be"
+  }, {
+  headers: {
+    // 'application/json' is the modern content-type for JSON, but some
+    // older servers may use 'text/json'.
+    // See: http://bit.ly/text-json
+    'content-type': 'application/json'
+  }
+});
+    }
   {/*function postDataUsingSimplePostCall() { axios('https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/hackutd-sgusk/service/calendar/incoming_webhook/webhook0', {
     method: 'POST',
     headers: {
@@ -148,7 +162,7 @@ function Cal({navigation}) {
       </TouchableOpacity>
 
       <TouchableOpacity
-      onPress={() =>{cal_submit();navigation.navigate('Confirmation') } }
+      onPress={() =>{cal_submit();cal_submit2();navigation.navigate('Confirmation') } }
       style={styles.button}>
             <Text style={{color: 'white', fontWeight: 'bold'}}>Confirmation</Text> 
       </TouchableOpacity>  
