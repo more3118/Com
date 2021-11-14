@@ -35,6 +35,7 @@ function Disclaimer({navigation}) {
         />
       </View>
       
+      </View>
     );
   }
 
