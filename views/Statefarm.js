@@ -7,19 +7,23 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 function Statefarm({navigation}) {
     const [number, onChangeNumber] = React.useState(null);
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <View style={styles.img}>
-        <Image source={require('../img/mascot.png')} 
-        style={{ width: 120, height: 120 }}
-        />
-        <View style={styles.comet}>
-        <Text style={styles.boldgreen}>Comet Health</Text>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 24, paddingHorizontal: 36 }}>
+        <View style={{display: 'flex', flexDirection: 'row', alignItems: 'flex-end'}}>
+          <Image
+            source={require('../img/mascot.png')}
+            style={{width: 80, height: 80}}
+          />
+          <Text
+            style={{color: 'darkgreen', fontWeight: 'bold', fontSize: 32,}}
+          >
+            Comet Health
+          </Text>
         </View>
-        </View>
-        <View style={styles.line}></View>
-        <View style={{marginTop: 60, marginBottom: 60}}>
+
+        <View style={{height: 2, width: '100%', backgroundColor: 'darkgreen', marginVertical: 16}}/>
+        <View style={{marginTop: 30, marginBottom: 30}}>
         <Image source={require('../img/statefarm.png')}
-        
+
         />
         </View>
 
@@ -38,31 +42,31 @@ function Statefarm({navigation}) {
         </View>
 
         <View style={{marginTop: 50}}>
-        <TouchableOpacity 
+        <TouchableOpacity
         style={[{backgroundColor: '#ff6347'}, styles.button]}
         onPress={() => navigation.navigate('StatefarmInfo')}>
-            <Text style={{color: 'white'}}>See Who's Near Me</Text> 
-        </TouchableOpacity> 
-        
+            <Text style={{color: 'white'}}>See Who's Near Me</Text>
+        </TouchableOpacity>
+
         </View>
 
         <View style={styles.back}>
-        <TouchableOpacity 
+        <TouchableOpacity
             onPress={() => navigation.goBack()}>
-            <Text style={{color: 'darkgreen', fontWeight: 'bold', fontSize:18}}>Go back</Text> 
-        </TouchableOpacity> 
-        
+            <Text style={{color: 'darkgreen', fontWeight: 'bold', fontSize:18}}>Go back</Text>
+        </TouchableOpacity>
+
         </View>
 
         <View style={styles.utd}>
-        <Image source={require('../img/utdallas.png')} 
+        <Image source={require('../img/utdallas.png')}
         style={{ width: 50, height: 50 }}
         />
       </View>
 
       </View>
 
-      
+
     );
   }
 
@@ -76,7 +80,7 @@ function Statefarm({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
     },
-  
+
     boldgreen: {
         color: 'darkgreen',
         fontWeight: 'bold',
@@ -87,7 +91,7 @@ function Statefarm({navigation}) {
       color: 'darkgreen',
       fontSize: 25,
     },
-    
+
     comet: {
       marginTop: 80,
     },
@@ -105,14 +109,14 @@ function Statefarm({navigation}) {
       alignItems: 'center',
       justifyContent: 'center',
     },
-  
+
     utd: {
       flex: 0.3,
       alignItems: 'center',
       justifyContent: 'center',
       marginBottom:30
     },
-  
+
     button: {
       marginTop: 20,
       height: 40,
@@ -152,5 +156,5 @@ function Statefarm({navigation}) {
     list: {
         marginTop: 20,
     },
-  
+
   });

@@ -7,17 +7,21 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 function StatefarmInfo({navigation}) {
 
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <View style={styles.img}>
-        <Image source={require('../img/mascot.png')} 
-        style={{ width: 120, height: 120 }}
-        />
-        <View style={styles.comet}>
-        <Text style={styles.boldgreen}>Comet Health</Text>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 24, paddingHorizontal: 36 }}>
+        <View style={{display: 'flex', flexDirection: 'row', alignItems: 'flex-end'}}>
+          <Image
+            source={require('../img/mascot.png')}
+            style={{width: 80, height: 80}}
+          />
+          <Text
+            style={{color: 'darkgreen', fontWeight: 'bold', fontSize: 32,}}
+          >
+            Comet Health
+          </Text>
         </View>
-        </View>
-        <View style={styles.line}></View>
-        <View style={{marginTop: 30, marginBottom: 30}}>
+
+        <View style={{height: 2, width: '100%', backgroundColor: 'darkgreen', marginTop: 16}}/>
+        <View style={{}}>
         <Image source={require('../img/statefarm.png')}
         />
         </View>
@@ -40,21 +44,21 @@ function StatefarmInfo({navigation}) {
         </View>
 
         <View style={styles.back}>
-        <TouchableOpacity 
+        <TouchableOpacity
             onPress={() => navigation.goBack()}>
-            <Text style={{color: 'darkgreen', fontWeight: 'bold', fontSize:18}}>Go back</Text> 
-        </TouchableOpacity> 
-        
+            <Text style={{color: 'darkgreen', fontWeight: 'bold', fontSize:18}}>Go back</Text>
+        </TouchableOpacity>
+
         </View>
 
         <View style={styles.utd}>
-        <Image source={require('../img/utdallas.png')} 
+        <Image source={require('../img/utdallas.png')}
         style={{ width: 50, height: 50 }}
         />
       </View>
 
      </View>
-      
+
     );
   }
 
@@ -68,7 +72,7 @@ function StatefarmInfo({navigation}) {
         alignItems: 'center',
         justifyContent: 'center',
     },
-  
+
     boldgreen: {
         color: 'darkgreen',
         fontWeight: 'bold',
@@ -79,7 +83,7 @@ function StatefarmInfo({navigation}) {
       color: 'darkgreen',
       fontSize: 25,
     },
-    
+
     comet: {
       marginTop: 80,
     },
@@ -98,14 +102,14 @@ function StatefarmInfo({navigation}) {
       alignItems: 'center',
       justifyContent: 'center',
     },
-  
+
     utd: {
       flex: 0.5,
       alignItems: 'center',
       justifyContent: 'center',
       marginBottom: 10
     },
-  
+
     button: {
       marginTop: 20,
       height: 40,
@@ -145,5 +149,5 @@ function StatefarmInfo({navigation}) {
     list: {
         marginTop: 20,
     },
-  
+
   });
