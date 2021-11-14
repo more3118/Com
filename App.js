@@ -5,7 +5,7 @@ import Survey from "./views/Survey"
 import Therapist from "./views/Therapist"
 import SurveyQues from "./views/SurveyQues"
 import StatefarmInfo from "./views/StatefarmInfo"
-import {StyleSheet, Text, View, Button, Image} from 'react-native';
+import {StyleSheet, Text, View, Button, Image, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AuthProvider} from "./providers/AuthProvider";
@@ -22,36 +22,31 @@ function HomeScreen({navigation}) {
                style={{width: 300, height: 300}}
         />
       </View>
-      <View style={styles.button}>
-        <Button
-          color="white"
-          title="Mental Health Survey"
-          onPress={() => navigation.navigate('Survey')}
-        />
-      </View>
-      <View style={styles.button}>
-        <Button
-          color="white"
-          title="List of Counselors"
-          onPress={() => navigation.navigate('Therapist')}
-        />
-      </View>
-      <View style={styles.button}>
-        <Button
-          color="white"
-          title="State Farm Insurance"
-          onPress={() => navigation.navigate('Statefarm')}
-        />
-      </View>
-      <View style={styles.button}>
-        <Button
-          color="white"
-          title="Disclaimer"
-          onPress={() => navigation.navigate('Disclaimer')}
-        />
-      </View>
 
+      <TouchableOpacity
+      onPress={() => navigation.navigate('Survey')}
+      style={styles.button}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Mental Health Survey</Text> 
+        </TouchableOpacity> 
 
+      <TouchableOpacity
+      onPress={() => navigation.navigate('Therapist')}
+      style={styles.button}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>List of Counselors</Text> 
+      </TouchableOpacity>
+
+      <TouchableOpacity
+      onPress={() => navigation.navigate('Statefarm')}
+      style={styles.button}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>State Farm Insurance</Text> 
+      </TouchableOpacity>  
+
+      <TouchableOpacity
+      onPress={() => navigation.navigate('Disclaimer')}
+      style={styles.button}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Disclaimer</Text> 
+      </TouchableOpacity> 
+      
       <View style={styles.utd}>
         <Image source={require('./img/utdallas.png')}
                style={{width: 50, height: 50}}
@@ -71,15 +66,15 @@ function App() {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen
-              name="Home"
-              component={HomeScreen}
+              name="Disclaimer"
+              component={Disclaimer}
               options={{
                 headerShown: false
               }}
             />
             <Stack.Screen
-              name="Disclaimer"
-              component={Disclaimer}
+              name="HomeScreen"
+              component={HomeScreen}
               options={{
                 headerShown: false
               }}
@@ -163,6 +158,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'darkgreen',
+    borderRadius: 5,
   },
 
 });
