@@ -4,6 +4,7 @@ import Disclaimer from "./views/Disclaimer"
 import Statefarm from "./views/Statefarm"
 import Survey from "./views/Survey"
 import Therapist from "./views/Therapist"
+// import SurveyQues from "./views/SurveyQues"
 import { StyleSheet, Text, View, Button, Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -26,7 +27,6 @@ function HomeScreen({ navigation }) {
       <Button 
         color = "white"
         title="Mental Health Survey"
-   
         onPress={() => navigation.navigate('Survey')}
       /> 
       </View>
@@ -65,14 +65,6 @@ function HomeScreen({ navigation }) {
 
 const Stack = createNativeStackNavigator();
 
-function DetailsScreen({navigate}) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-    </View>
-  );
-}
-
 function App() {
   return (
     <NavigationContainer>
@@ -81,25 +73,33 @@ function App() {
         options={{
           headerShown: false
         }} />
-        <Stack.Screen name="Disclaimer" component={Disclaimer} />
-        <Stack.Screen name="Survey" component={Survey} />
-        <Stack.Screen name="Therapist" component={Therapist} />
-        <Stack.Screen name="Statefarm" component={Statefarm} />
+        <Stack.Screen name="Disclaimer" component={Disclaimer} 
+        options={{
+          headerShown: false
+        }}/>
+        <Stack.Screen name="Survey" component={Survey} 
+        options={{
+          headerShown: false
+        }}
+        />
+        <Stack.Screen name="Therapist" component={Therapist} 
+        options={{
+          headerShown: false
+        }}/>
+        <Stack.Screen name="Statefarm" component={Statefarm} 
+        options={{
+          headerShown: false
+        }}/>
+        {/* <Stack.Screen name="SurveyQues" component={SurveyQues} 
+        options={{
+          headerShown: false
+        }}/> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
 export default App;
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
 
 const styles = StyleSheet.create({
   container: {
