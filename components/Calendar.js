@@ -1,18 +1,41 @@
 import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 import React, { useState } from "react";
-import { Button, Text, View } from "react-native";
+import { Alert, Button, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import tailwind from "tailwind-rn"
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import axios from 'axios';
 
-function Cal({}) {
+
+function Cal() {
     const [count, setCount] = useState('No Date Selected!');
     const [isModalVisible, setModalVisible] = useState(false);
     const [isModalVisible2, setModalVisible2] = useState(false);
     const [time, setTime] = useState('No Time Selected!');
     const [doctor, setDoc] = useState('No Health Provider Selected!');
     
+    function cal_submit(){ axios.post('https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/hackutd-sgusk/service/calendar/incoming_webhook/webhook0', { name: 'Shreyas More',count:count,time:time,doctor:doctor,}, {
+  headers: {
+    // 'application/json' is the modern content-type for JSON, but some
+    // older servers may use 'text/json'.
+    // See: http://bit.ly/text-json
+    'content-type': 'application/json'
+  }
+});
+    }
+  {/*function postDataUsingSimplePostCall() { axios('https://us-east-1.aws.webhooks.mongodb-realm.com/api/client/v2.0/app/hackutd-sgusk/service/calendar/incoming_webhook/webhook0', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify({cpfcnpj: "15060655709"})
+  }).then(function(response) {
+      console.log(response.data);
+
+    });};
     
+    
+  */}
     const toggleModal = () => {
     setModalVisible(!isModalVisible);
     };
@@ -105,6 +128,7 @@ function Cal({}) {
   <Button title="Choose Times" onPress={toggleModal}></Button>
   <Text></Text>
   <Button title="Doctor" onPress={toggleModal2}></Button>
+  <Button title="Submit" onPress={cal_submit}></Button>
   <Modal isVisible={isModalVisible}>
         <View style={tailwind("justify-center")}>
           <Button title="8:30AM" color="orange"  onPress={(time) => {setTime("8:30AM")}}></Button>
