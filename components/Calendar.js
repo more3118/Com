@@ -6,16 +6,18 @@ import tailwind from "tailwind-rn"
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function Cal({}) {
-    const [count, setCount] = useState('No Date Selected');
+    const [count, setCount] = useState('No Date Selected!');
     const [isModalVisible, setModalVisible] = useState(false);
-    const [time, setTime] = useState('No Time Selected');
+    const [isModalVisible2, setModalVisible2] = useState(false);
+    const [time, setTime] = useState('No Time Selected!');
+    const [doctor, setDoc] = useState('No Health Provider Selected!');
     
     
     const toggleModal = () => {
     setModalVisible(!isModalVisible);
     };
     const toggleModal2 = () => {
-      setModalVisible(!isModalVisible);
+      setModalVisible2(!isModalVisible2);
       };
   return (
 
@@ -99,22 +101,36 @@ function Cal({}) {
   />
   <Text style={tailwind("text-center text-2xl my-2 font-bold")}>Your Date: {count}</Text>
   <Text style={tailwind("text-center text-2xl my-2 font-bold")}>Your Time: {time}</Text>
+  <Text style={tailwind("text-center text-2xl my-2 font-bold")}>Your Doctor: {doctor}</Text>
   <Button title="Choose Times" onPress={toggleModal}></Button>
   <Text></Text>
-  <Button title="Done" onPress={toggleModal2}></Button>
+  <Button title="Doctor" onPress={toggleModal2}></Button>
   <Modal isVisible={isModalVisible}>
         <View style={tailwind("justify-center")}>
-          <Button title="8:30AM" color="orange"  onPress={toggleModal,(time) => {setTime("8:30AM")}}></Button>
+          <Button title="8:30AM" color="orange"  onPress={(time) => {setTime("8:30AM")}}></Button>
           <Text></Text>
-          <Button title="12:00PM" color="orange"  onPress={toggleModal,(time) => {setTime("12:00PM")}}></Button>
+          <Button title="12:00PM" color="orange"  onPress={(time) => {setTime("12:00PM")}}></Button>
           <Text></Text>
-          <Button title="2:30PM" color="orange"  onPress={toggleModal,(time) => {setTime("2:30PM")}}></Button>
+          <Button title="2:30PM" color="orange"  onPress={(time) => {setTime("2:30PM")}}></Button>
           <Text></Text>
-          <Button title="4:30PM" color="orange"  onPress={toggleModal,(time) => {setTime("4:30PM")}}></Button>
+          <Button title="4:30PM" color="orange"  onPress={(time) => {setTime("4:30PM")}}></Button>
           <Text></Text>
           <Button title="Done" color="black"  onPress={() => toggleModal()}></Button>
         </View>
-      </Modal>
+    </Modal>
+    <Modal isVisible={isModalVisible2}>
+        <View style={tailwind("justify-center")}>
+          <Button title="Doctor" color="orange"  onPress={(doctor) => {setDoc("Doctor1")}}></Button>
+          <Text></Text>
+          <Button title="Doctor2" color="orange"  onPress={(doctor) => {setDoc("Doctor2")}}></Button>
+          <Text></Text>
+          <Button title="Doctor3" color="orange"  onPress={(doctor) => {setDoc("Doctor3")}}></Button>
+          <Text></Text>
+          <Button title="Doctor4" color="orange"  onPress={(doctor) => {setDoc("Doctor4")}}></Button>
+          <Text></Text>
+          <Button title="Done" color="black"  onPress={() => toggleModal2()}></Button>
+        </View>
+    </Modal>
 </View>
 
   );
