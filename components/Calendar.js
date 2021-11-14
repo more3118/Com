@@ -1,6 +1,6 @@
 import {Calendar, CalendarList, Agenda, Image} from 'react-native-calendars';
 import React, { useState } from "react";
-import { Alert, Button, Text, View } from "react-native";
+import { Alert, Button, Text, View,TouchableOpacity,StyleSheet } from "react-native";
 import Modal from "react-native-modal";
 import tailwind from "tailwind-rn"
 import axios from 'axios';
@@ -122,17 +122,75 @@ function Cal({navigation}) {
     // Enable the option to swipe between months. Default = false
     enableSwipeMonths={true}
   />
-  <Text style={tailwind("text-center text-2xl my-2 font-bold")}>Your Date: {count}</Text>
-  <Text style={tailwind("text-center text-2xl my-2 font-bold")}>Your Time: {time}</Text>
-  <Text style={tailwind("text-center text-2xl my-2 font-bold")}>Your Doctor: {doctor}</Text>
+  <Text style={tailwind("text-center text-xl my-2 font-bold")}>Your Date: {count}</Text>
+  <Text style={tailwind("text-center text-xl my-2 font-bold")}>Your Time: {time}</Text>
+  <Text style={tailwind("text-center text-xl my-2 font-bold")}>Your Doctor: {doctor}</Text>
+  
+  {/*
   <Button title="Choose Times" onPress={toggleModal}></Button>
   <Text></Text>
   <Button title="Doctor" onPress={toggleModal2}></Button>
   <Text></Text>
   <Button title="Submit" onPress={cal_submit}></Button>
   <Button title="Confirm" onPress={() => navigation.navigate('Confirmation')}></Button>
+*/}
+<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',paddingTop:100}} >
+  <TouchableOpacity
+      onPress={toggleModal}
+      style={styles.button}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Choose Time</Text> 
+        </TouchableOpacity> 
+
+      <TouchableOpacity
+      onPress={toggleModal2} 
+      style={styles.button}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Choose Counselors</Text> 
+      </TouchableOpacity>
+
+      <TouchableOpacity
+      onPress={() =>{cal_submit();navigation.navigate('Confirmation') } }
+      style={styles.button}>
+            <Text style={{color: 'white', fontWeight: 'bold'}}>Confirmation</Text> 
+      </TouchableOpacity>  
+
+      </View>
+  
+  
+  
   <Modal isVisible={isModalVisible}>
-        <View style={tailwind("justify-center")}>
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',}} >
+        <Text style={tailwind("text-white")}>Avaliable Time</Text>
+            <TouchableOpacity
+          onPress={(time) => {setTime("8:30AM")}}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>8:30 AM</Text> 
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+          onPress={(time) => {setTime("12:00PM")}}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>12:30 PM</Text> 
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+          onPress={(time) => {setTime("2:30PM")}}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>2:30PM</Text> 
+            </TouchableOpacity>
+            <TouchableOpacity
+          onPress={(time) => {setTime("4:30PM")}}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>4:30PM</Text> 
+            </TouchableOpacity>
+
+            <TouchableOpacity
+          onPress={toggleModal}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Done</Text> 
+            </TouchableOpacity>
+            
+          {/*
+          
           <Button title="8:30AM" color="orange"  onPress={(time) => {setTime("8:30AM")}}></Button>
           <Text></Text>
           <Button title="12:00PM" color="orange"  onPress={(time) => {setTime("12:00PM")}}></Button>
@@ -142,9 +200,44 @@ function Cal({navigation}) {
           <Button title="4:30PM" color="orange"  onPress={(time) => {setTime("4:30PM")}}></Button>
           <Text></Text>
           <Button title="Done" color="black"  onPress={() => toggleModal()}></Button>
-        </View>
+          */}
+        
+          </View>
     </Modal>
+    
     <Modal isVisible={isModalVisible2}>
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center',}} >
+        <Text style={tailwind("text-white")}>Avaliable Time</Text>
+            <TouchableOpacity
+          onPress={(doctor) => {setDoc("Doctor1")}}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Counselor 1 </Text> 
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+          onPress={(doctor) => {setDoc("Doctor2")}}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Counselor 2</Text> 
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+          onPress={(doctor) => {setDoc("Doctor3")}}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Counselor 3</Text> 
+            </TouchableOpacity>
+            <TouchableOpacity
+          onPress={(doctor) => {setDoc("Doctor4")}}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Counselor 4</Text> 
+            </TouchableOpacity>
+
+            <TouchableOpacity
+          onPress={toggleModal2}
+          style={styles.button}>
+                <Text style={{color: 'white', fontWeight: 'bold'}}>Done</Text> 
+            </TouchableOpacity>
+        {/*}
+        
         <View style={tailwind("justify-center")}>
           <Button title="Doctor" color="orange"  onPress={(doctor) => {setDoc("Doctor1")}}></Button>
           <Text></Text>
@@ -156,9 +249,51 @@ function Cal({navigation}) {
           <Text></Text>
           <Button title="Done" color="black"  onPress={() => toggleModal2()}></Button>
         </View>
+        */}
+        </View>
     </Modal>
-</View>
+    </View>
 
   );
 }
 export default Cal;
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 100,
+    flex: 0.4,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  green: {
+    flex: 1,
+    color: 'darkgreen',
+    fontWeight: 'bold',
+    fontSize: 50,
+  },
+
+  img: {
+    flex: 1.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  utd: {
+    flex: 0.5,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  button: {
+    marginTop: 20,
+    height: 40,
+    width: 250,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'darkgreen',
+    borderRadius: 5,
+  },
+
+});
