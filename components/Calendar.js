@@ -128,6 +128,7 @@ function Cal() {
   <Button title="Choose Times" onPress={toggleModal}></Button>
   <Text></Text>
   <Button title="Doctor" onPress={toggleModal2}></Button>
+  <Text></Text>
   <Button title="Submit" onPress={cal_submit}></Button>
   <Modal isVisible={isModalVisible}>
         <View style={tailwind("justify-center")}>
