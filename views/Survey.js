@@ -1,30 +1,43 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, TextInput} from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, Image} from 'react-native';
 import Home from '../App';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import App from '../App';
-// import SurveyQues from 'SurveyQues';
 
-
-function Survey({ navigation: { goBack }, navigation}) {
+function Survey({ navigation}) {
     const [text, onChangeText] = React.useState("Useless Text");
 
     return (
 
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View>
         <TextInput
         style={styles.input}
         onChangeText={onChangeText}
         value={text}
         />
+        <Text>You are a new user. Click below to start</Text>
+        <Text>You are a returning user. We highly recommend that you submit a new survey on every visiy.</Text>
+        </View>
 
-        <Button onPress={() => goBack()} title="Go back" />
+        <View> 
         <Button
-        color = "white"
-        title="List of Counselors"
-        onPress={() => navigation.navigate('SurveyQues')}
-      />
+            onPress={() => navigation.navigate('SurveyQues')}
+            title="Start Survey"/>
+        </View>
+        <View>
+        <Button
+            title="Continue with Previous Result"/>
+        </View>
+
+        <Button onPress={() => navigation.goBack()} title="Go back" />
+
+        <View style={styles.utd}>
+        <Image source={require('../img/utdallas.png')} 
+        style={{ width: 50, height: 50 }}
+        />
+      </View>
 
       </View>
     );
