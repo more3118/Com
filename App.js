@@ -5,6 +5,7 @@ import Statefarm from "./views/Statefarm"
 import Survey from "./views/Survey"
 import Therapist from "./views/Therapist"
 import SurveyQues from "./views/SurveyQues"
+import StatefarmInfo from "./views/StatefarmInfo"
 import { StyleSheet, Text, View, Button, Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -67,14 +68,14 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen}
-        options={{
-          headerShown: false
-        }} />
         <Stack.Screen name="Disclaimer" component={Disclaimer} 
         options={{
           headerShown: false
         }}/>
+        <Stack.Screen name="HomeScreen" component={HomeScreen}
+        options={{
+          headerShown: false
+        }} />
         <Stack.Screen name="Survey" component={Survey} 
         options={{
           headerShown: false
@@ -82,13 +83,17 @@ function App() {
         />
         <Stack.Screen name="Therapist" component={Therapist} 
         options={{
-          headerShown: true
+          headerShown: false
         }}/>
         <Stack.Screen name="Statefarm" component={Statefarm} 
         options={{
           headerShown: false
         }}/>
         <Stack.Screen name="SurveyQues" component={SurveyQues} 
+        options={{
+          headerShown: false
+        }}/>
+        <Stack.Screen name="StatefarmInfo" component={StatefarmInfo} 
         options={{
           headerShown: false
         }}/>
