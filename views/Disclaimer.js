@@ -16,7 +16,7 @@ function Disclaimer({navigation}) {
       </View>
       <View style={styles.claim}>
         <View>
-          <Text style={{fontWeight: 'bold',}}>Comet Health Application Disclaimer</Text></View>
+          <Text style={{fontWeight: 'bold', fontSize: 15}}>Comet Health Application Disclaimer</Text></View>
         <View style={{marginTop: 20}}>
         <Text style={styles.text}>This application is not a substitute for medical advice. Users of the application should consult with healthcare professional before making any health or medical-related decisions.</Text>
         </View>
@@ -26,7 +26,7 @@ function Disclaimer({navigation}) {
       </View>
       <TouchableOpacity
       onPress={() => navigation.navigate('HomeScreen')}>
-            <Text style={{color: 'darkgreen', fontWeight: 'bold'}}>Accept</Text> 
+            <Text style={{color: 'darkgreen', fontWeight: 'bold', fontSize: 20}}>Accept</Text> 
         </TouchableOpacity> 
 
       <View style={styles.utd}>
@@ -88,6 +88,7 @@ function Disclaimer({navigation}) {
     text: {
       color: 'grey',
       fontSize: 15,
+      lineHeight: 20,
   },
   
   });

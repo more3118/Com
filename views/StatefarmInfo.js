@@ -22,11 +22,11 @@ function StatefarmInfo({navigation}) {
         />
         </View>
         <View style={{marginBottom: 30, marginRight: 60}}>
-        <Text style={{color: 'red'}}>Last Visited</Text>
+        <Text style={{color: 'red', fontSize: 18}}>Last Visited</Text>
         <Text>Dr. Leah M. Johnson</Text>
         <Text>110 Cityline Dr, Richardson, TX 75082</Text>
         </View>
-        <View style={{marginBottom: 20}}><Text style={{color: 'red'}}>Doctors Near Me (within 5 miles)</Text></View>
+        <View style={{marginBottom: 20}}><Text style={{color: 'red', fontSize: 18}}>Doctors Near Me (within 5 miles)</Text></View>
         <View style={{alignContent: 'flex-start'}}>
             <View style={{marginBottom: 20}}>
                 <Text>Dr. Eddie Kim</Text>
@@ -42,7 +42,7 @@ function StatefarmInfo({navigation}) {
         <View style={styles.back}>
         <TouchableOpacity 
             onPress={() => navigation.goBack()}>
-            <Text style={{color: 'darkgreen', fontWeight: 'bold'}}>Go back</Text> 
+            <Text style={{color: 'darkgreen', fontWeight: 'bold', fontSize:18}}>Go back</Text> 
         </TouchableOpacity> 
         
         </View>
@@ -85,6 +85,7 @@ function StatefarmInfo({navigation}) {
     },
 
     line: {
+        marginTop: 15,
         backgroundColor: 'darkgreen',
         height: 1,
         width: 300,
@@ -102,6 +103,7 @@ function StatefarmInfo({navigation}) {
       flex: 0.5,
       alignItems: 'center',
       justifyContent: 'center',
+      marginBottom: 10
     },
   
     button: {
@@ -118,7 +120,7 @@ function StatefarmInfo({navigation}) {
     },
 
     back: {
-        marginTop: 100,
+        marginTop: 80,
         marginLeft: 250,
     },
 

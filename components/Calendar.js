@@ -44,7 +44,8 @@ function Cal({navigation}) {
       };
   return (
 
-    <View>
+    <View style={{backgroundColor: 'white'}}> 
+    <View style={{marginTop: 130}}></View>
     <CalendarList
     style={{
         borderWidth: 1,

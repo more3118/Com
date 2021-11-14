@@ -28,7 +28,7 @@ function Confirmation({navigation}) {
         <View style={styles.back}>
         <TouchableOpacity 
         onPress={() => navigation.navigate('HomeScreen')}>
-            <Text style={{color: 'darkgreen', fontWeight: 'bold'}}>Go to home page</Text> 
+            <Text style={{color: 'darkgreen', fontWeight: 'bold', fontSize: 18}}>Go to home page</Text> 
         </TouchableOpacity> 
         
         </View>
