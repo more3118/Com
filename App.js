@@ -8,8 +8,6 @@ import { StyleSheet, Text, View, Button, Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-
-
 function HomeScreen({ navigation }) {
   return (
     <View style={{ backgroundColor: '#fff', flex: 1, alignItems: 'center', justifyContent: 'center' }}>
