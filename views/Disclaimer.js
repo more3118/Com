@@ -10,7 +10,7 @@ import tailwind from 'tailwind-rn';
 function Disclaimer() {
     return (
       <View>
-        <Text style={tailwind("text-2xl text-center")}>Calendar</Text>
+        <Text style={tailwind("text-3xl text-center font-bold my-16")}>Appointment Calendar</Text>
         <Cal />
       </View>
     );

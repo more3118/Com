@@ -3,11 +3,14 @@ import React, { useState } from "react";
 import { Button, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import tailwind from "tailwind-rn"
+import {LocaleConfig} from 'react-native-calendars';
 
 function Cal() {
-    
+    const [count, setCount] = useState('');
   return (
-    <Calendar
+
+    <View>
+    <CalendarList
     style={{
         borderWidth: 1,
         borderColor: 'gray',
@@ -47,7 +50,7 @@ function Cal() {
     // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
     maxDate={'2022-05-30'}
     // Handler which gets executed on day press. Default = undefined
-    onDayPress={(day) => {console.log('selected day', day)}}
+    onDayPress={(day) => {setCount(day.dateString)}}
     // Handler which gets executed on day long press. Default = undefined
     onDayLongPress={(day) => {console.log('selected day', day)}}
     // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
@@ -84,7 +87,9 @@ function Cal() {
     // Enable the option to swipe between months. Default = false
     enableSwipeMonths={true}
   />
-    
+  <Text>{count}</Text>
+</View>
+
   );
 }
 export default Cal;
