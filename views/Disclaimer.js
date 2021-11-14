@@ -7,7 +7,7 @@ import Cal from '../components/Calendar';
 import tailwind from 'tailwind-rn';
 
 
-function Disclaimer() {
+function Disclaimer({navigation}) {
     return (
       <View>
         <Text style={tailwind("text-3xl text-center font-bold my-16")}>Appointment Calendar</Text>

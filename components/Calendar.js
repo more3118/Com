@@ -3,14 +3,20 @@ import React, { useState } from "react";
 import { Button, Text, View } from "react-native";
 import Modal from "react-native-modal";
 import tailwind from "tailwind-rn"
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function Cal() {
-    const [count, setCount] = useState('');
+function Cal({}) {
+    const [count, setCount] = useState('No Date Selected');
     const [isModalVisible, setModalVisible] = useState(false);
-
+    const [time, setTime] = useState('No Time Selected');
+    
+    
     const toggleModal = () => {
     setModalVisible(!isModalVisible);
     };
+    const toggleModal2 = () => {
+      setModalVisible(!isModalVisible);
+      };
   return (
 
     <View>
@@ -91,13 +97,22 @@ function Cal() {
     // Enable the option to swipe between months. Default = false
     enableSwipeMonths={true}
   />
-  <Text style={tailwind("text-center text-2xl my-4")}>Your Date: {count}</Text>
+  <Text style={tailwind("text-center text-2xl my-2 font-bold")}>Your Date: {count}</Text>
+  <Text style={tailwind("text-center text-2xl my-2 font-bold")}>Your Time: {time}</Text>
   <Button title="Choose Times" onPress={toggleModal}></Button>
+  <Text></Text>
+  <Button title="Done" onPress={toggleModal2}></Button>
   <Modal isVisible={isModalVisible}>
         <View style={tailwind("justify-center")}>
-          <Text style={tailwind("text-3xl text-white bg-red-500 text-center mx-2 my-4 rounded-full")} > In a Real Emergency Call 911 </Text>
-          <Button title="Accept Terms" color="orange"  onPress={toggleModal}></Button>
-          
+          <Button title="8:30AM" color="orange"  onPress={toggleModal,(time) => {setTime("8:30AM")}}></Button>
+          <Text></Text>
+          <Button title="12:00PM" color="orange"  onPress={toggleModal,(time) => {setTime("12:00PM")}}></Button>
+          <Text></Text>
+          <Button title="2:30PM" color="orange"  onPress={toggleModal,(time) => {setTime("2:30PM")}}></Button>
+          <Text></Text>
+          <Button title="4:30PM" color="orange"  onPress={toggleModal,(time) => {setTime("4:30PM")}}></Button>
+          <Text></Text>
+          <Button title="Done" color="black"  onPress={() => toggleModal()}></Button>
         </View>
       </Modal>
 </View>
